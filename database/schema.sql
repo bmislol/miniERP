@@ -29,9 +29,17 @@ CREATE TABLE products (
 
 CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
-    customer_id INT REFERENCES customers(id), -- Who bought it
-    sales_rep_user_id INT REFERENCES users(id), -- Who sold it (The "SoldBy" you wanted)
+    customer_id INT REFERENCES customers(id), 
+    sales_rep_user_id INT REFERENCES users(id),
     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status VARCHAR(20) DEFAULT 'PENDING',
     total_amount DECIMAL(10, 2) DEFAULT 0.00
+);
+
+CREATE TABLE order_items (
+    id SERIAL PRIMARY KEY,
+    order_id INT REFERENCES orders(id) ON DELETE CASCADE, 
+    product_id INT REFERENCES products(id),              
+    quantity INT NOT NULL,
+    price_at_purchase DECIMAL(10, 2) NOT NULL 
 );

@@ -14,6 +14,8 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 @Table(name = "orders")
 @Data
@@ -30,7 +32,8 @@ public class Order {
     @Column(name = "sales_rep_user_id", nullable = false)
     private Long salesRepUserId;
 
-    @Column(name = "order_date")
+    @CreationTimestamp
+    @Column(name = "order_date", updatable = false)
     private LocalDateTime orderDate;
 
     @Column(nullable = false)

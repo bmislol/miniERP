@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import com.charbel.backend.service.ProductService;
 import com.charbel.backend.entity.Product;
@@ -33,6 +34,12 @@ public class ProductController {
 
     @PostMapping
     public Product createProduct(@RequestBody Product product){
+        return productService.saveProduct(product);
+    }
+
+    @PutMapping("/{id}")
+    public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
+        product.setId(id); // Ensure the ID in the URL matches the object
         return productService.saveProduct(product);
     }
 
